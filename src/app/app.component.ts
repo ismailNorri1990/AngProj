@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AppareilService } from './services/appareil.service';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/Rx';
 
 @Component({
   selector: 'app-root',
@@ -8,32 +10,21 @@ import { AppareilService } from './services/appareil.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private appareilService: AppareilService) {
-    setTimeout(
-      () => { this.isAuth = true; } , 4000
-      );
+secondes: number;
+  constructor() {
+
   }
-
-  appareils: any[];
-
-  isAuth = false;
-  lastUpdate = new Promise(
-    (resolve, reject) => {
-      const date =  new Date();
-      setTimeout(() => resolve(date), 2000);
-              });
-
   ngOnInit(): void {
-    this.appareils = this.appareilService.appareils;
-  }
-
-
- onAllumer() {
-    this.appareilService.switchOnAll();
-  }
-
- onEteindre() {
-  this.appareilService.switchOffAll();
+    const counter = Observable.interval(1000);
+    counter.subscribe(
+      (value: number) => {
+        this.secondes = value;
+      }, (error: any) => {
+        console.log('Une erreur a été rencontrée !');
+      }, () => {
+        console.log('Observable complété !');
+      }
+    );
   }
 }
 
