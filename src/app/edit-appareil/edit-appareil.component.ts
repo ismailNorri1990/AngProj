@@ -10,13 +10,13 @@ import { Router } from '@angular/router';
 })
 export class EditAppareilComponent implements OnInit {
 
-  constructor(private appareilService: AppareilService, private router:Router) { }
+  constructor(private appareilService: AppareilService, private router: Router) { }
 
   defaultOnOff = 'Etteint';
 
   onSubmit( form: NgForm) {
     const name = form.value['name'];
-    const status = form.value['name'];
+    const status = form.value['status'];
     this.appareilService.addAppareil( name, status);
     this.router.navigate(['appareils']);
   }

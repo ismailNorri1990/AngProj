@@ -29,12 +29,12 @@ export class AppareilComponent implements OnInit {
     }
   }
 
-  isOn() {
-    if (this.appareilService.status === 'Etteint') {
-        this.appareilService.switchOnOne(this.indexOfAppareil);
-    } else if (this.appareilService.status === 'Allumé') {
-      this.appareilService.switchOnOne(this.indexOfAppareil);
-    }
+  onAllumerOne() {
+    this.appareilService.switchOnOne(this.indexOfAppareil);
+  }
+
+  onEtteindreOne() {
+    this.appareilService.switchOffOne(this.indexOfAppareil);
   }
 
 }
